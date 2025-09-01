@@ -16,10 +16,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions)); 
 app.use(express.json()); 
-
 //Routes 
 
 app.use("/api/posts", routesOrg)
+app.use("api/get", routesOrg)
 
 app.get("/api", (req, res) => {
     res.json({ message: "Blue Eagle Directory API is running! Hello" });

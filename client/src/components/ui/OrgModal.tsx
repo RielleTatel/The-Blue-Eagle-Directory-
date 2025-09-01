@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { X, Plus, Trash2 } from "lucide-react";
+import { X } from "lucide-react";
 import include from "../../hookQueries/OrgInsertion";
 
 interface ModalProps {
@@ -105,7 +105,10 @@ const OrgModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             </label>
             <input
               id="facebookLink"
-              type="url"
+              type="url" 
+              name="link"
+              onChange={handleChange}
+              value={formData.link ?? undefined}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-body"
               placeholder="https://www.facebook.com/yourorganization"
             />
@@ -120,24 +123,35 @@ const OrgModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               <div className="flex items-center gap-2">
                 <input
                   type="text"
+                  name="tag1"
+                  onChange={handleChange}
+                  value={formData.tag1 ?? undefined}
                   className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-body"
                   placeholder="Tag 1"
                 />
-                <button
-                  type="button"
-                  className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                  aria-label="Remove tag 1"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+              </div> 
+
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  name="tag2"
+                  onChange={handleChange}
+                  value={formData.tag2 ?? undefined}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-body"
+                  placeholder="Tag 1"
+                />
+              </div> 
+
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  name="tag3"
+                  onChange={handleChange}
+                  value={formData.tag3 ?? undefined}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-body"
+                  placeholder="Tag 1"
+                />
               </div>
-              <button
-                type="button"
-                className="flex items-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-body"
-              >
-                <Plus className="w-4 h-4" />
-                Add another tag
-              </button>
             </div>
           </div>
 

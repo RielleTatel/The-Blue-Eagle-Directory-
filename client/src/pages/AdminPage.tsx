@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Select, SelectTrigger, SelectItem, SelectContent, SelectValue } from "../components/ui/select";
 import { Button } from "../components/ui/Button";
 import OrgModal from "../components/ui/OrgModal";
+import retrieveHook from "../hookQueries/GetOrganization";
 import {  Table,
     TableBody,
     TableCaption,
@@ -14,6 +15,7 @@ import {  Table,
 const AdminPage = () => {
     const [orgs, setOrgs] = useState<any[]>([]); 
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const {isTable, fetchTableData} = retrieveHook(); 
 
     useEffect(() => {
         const debugging = async () => {

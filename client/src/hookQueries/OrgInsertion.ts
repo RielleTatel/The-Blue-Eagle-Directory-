@@ -3,12 +3,21 @@ import { useState } from 'react';
 interface information {
     name: string; 
     description: string; 
+    link: string | null;  
+    tag1: string | null; 
+    tag2: string | null; 
+    tag3: string | null; 
 }
 
 const include = () => {
     const [formData, setFormdata] = useState<information>({
         name: '', 
-        description: ''}); 
+        description: '',
+        link: '', 
+        tag1: '',
+        tag2: '',
+        tag3: '',
+     }); 
 
     const handleChange = (e: any) => {
         setFormdata({...formData, [e.target.name]: e.target.value})
@@ -39,7 +48,7 @@ const include = () => {
             console.log('Success: ', data);
             
             // Reset form after successful submission
-            setFormdata({ name: '', description: '' });
+            setFormdata({ name: '', description: '', link: '', tag1:'', tag2:'', tag3:'' });
             
         } catch (err) {
             console.error('Error submitting form:', err);
