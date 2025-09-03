@@ -1,11 +1,20 @@
 import { useState, useEffect } from "react"; 
 
+interface information {
+    name: string; 
+    description: string; 
+    link: string | null;  
+    tag1: string | null; 
+    tag2: string | null; 
+    tag3: string | null; 
+}
+
 const retrieveHook = () => {
-    const [isTable, setIsTable] = useState({})
+    const [isTable, setIsTable] = useState<information[]>([])
 
     const fetchTable =  async () => {
         try {
-            const response = await fetch('to be followed')
+            const response = await fetch('http://localhost:8000/api/get')
             const data = await response.json(); 
             setIsTable(data)
 
@@ -15,7 +24,7 @@ const retrieveHook = () => {
     }
 
     useEffect(() => {
-        fetchTable
+        fetchTable();
     }, [])
 
     return {

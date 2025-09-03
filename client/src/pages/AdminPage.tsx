@@ -13,23 +13,12 @@ import {  Table,
     TableRow, } from "../components/ui/table"; 
 
 const AdminPage = () => {
-    const [orgs, setOrgs] = useState<any[]>([]); 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const {isTable, fetchTableData} = retrieveHook(); 
 
     useEffect(() => {
-        const debugging = async () => {
-            try {
-                const res = await fetch("http://localhost:8000/api/posts");
-                const data = await res.json(); 
-                setOrgs(data); 
-            } catch (err) {
-                console.error("Error fetching orgs:", err);
-            }
-        }
-
-        debugging()
-    }, [])
+        fetchTableData(); 
+    }, [fetchTableData])
 
     return (
         <>
@@ -90,48 +79,50 @@ const AdminPage = () => {
 
                     {/* content page */}
                     <div className="w-full lg:min-h-[500px] shadow-[0_0_4px_0_rgba(0,0,0,0.3)] rounded-md mt-5 overflow-hidden">  
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto"> 
                             <Table className="table-fixed w-full">
                                 <TableCaption> Organization database </TableCaption>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-[150px]"> name </TableHead>
-                                        <TableHead className="w-[120px]"> Tags </TableHead>
-                                        <TableHead className="w-[200px]"> Description </TableHead>
-                                        <TableHead className="w-[150px] text-right"> Public Links </TableHead>
-                                        <TableHead className="w-[100px] text-right"> Action </TableHead>
+                                            <TableHead className="w-[150px]"> name </TableHead>
+                                            <TableHead className="w-[120px]"> Tags </TableHead>
+                                            <TableHead className="w-[200px]"> Description </TableHead>
+                                            <TableHead className="w-[150px] text-right"> Public Links </TableHead>
+                                            <TableHead className="w-[100px] text-right"> Action </TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    <TableRow>
-                                        <TableCell className="font-medium">
-                                            <div className="truncate" title="">
-                                                asdalsdjnalsdnlansdlasddsadadaskdaljsdalsdjlaksjdlaksdjlaksjdlkasjdlakdjalskjdaslk
-                                            </div>
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className="truncate" title="">
-                                                asdalsdjnalsdnlansdlasddsadadaskdaljsdalsdjlaksjdlaksdjlaksjdlkasjdlakdjalskjdaslk
-                                            </div>
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className="truncate" title="">
-                                                asdalsdjnalsdnlansdlasddsadadaskdaljsdalsdjlaksjdlaksdjlaksjdlkasjdlakdjalskjdaslk
-                                            </div>
-                                        </TableCell>
-                                        <TableCell className="text-right">
-                                            <div className="truncate" title="">
-                                                asdalsdjnalsdnlansdlasddsadadaskdaljsdalsdjlaksjdlaksdjlaksjdlkasjdlakdjalskjdaslk
-                                            </div>
-                                        </TableCell>
-                                        <TableCell className="text-right">   
-                                            <Button
-                                                variant="tag"
-                                                className="italic"> 
-                                                Inspect
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
+                                    {isTable && isTable.map((org: any, index: number) => (
+                                        <TableRow key={index}>
+                                            <TableCell className="font-medium">
+                                                <div className="truncate" title={org.name}>
+                                                    {org.name}
+                                                </div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="truncate" title={`${org.tag1 || ''} ${org.tag2 || ''} ${org.tag3 || ''}`}>
+                                                    {[org.tag1, org.tag2, org.tag3].filter(Boolean).join(', ')}
+                                                </div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="truncate" title={org.description}>
+                                                    {org.description}
+                                                </div>
+                                            </TableCell>
+                                            <TableCell className="text-right">
+                                                <div className="truncate" title={org.link}>
+                                                    {org.link}
+                                                </div>
+                                            </TableCell>
+                                            <TableCell className="text-right">   
+                                                <Button
+                                                    variant="tag"
+                                                    className="italic"> 
+                                                    Inspect
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
                                 </TableBody>
                             </Table>
                         </div>
