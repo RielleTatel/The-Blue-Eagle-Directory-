@@ -20,6 +20,7 @@ app.use(express.json());
 
 app.use("/api/posts", routesOrg)
 app.use("/api/get", routesOrg)
+app.use("/api/delete", routesOrg)
 
 app.get("/api", (req, res) => {
     res.json({ message: "Blue Eagle Directory API is running! Hello" });

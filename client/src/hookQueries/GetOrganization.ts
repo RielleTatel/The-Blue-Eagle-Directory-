@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react"; 
 
 interface information {
@@ -14,10 +15,8 @@ const retrieveHook = () => {
 
     const fetchTable =  async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/get')
-            const data = await response.json(); 
-            setIsTable(data)
-
+            const response = await axios.get<information[]>('http://localhost:8000/api/get')
+            setIsTable(response.data)
         } catch (err) {
             console.log('An error has occured', err)
         }

@@ -13,6 +13,7 @@ const App = () => {
   const fetchApi = async () => {
     try {
       const response = await axios.get("http://localhost:8000/api")
+
       console.log(response.data)
     } catch {
       console.error("API Error:")
